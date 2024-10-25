@@ -34,8 +34,14 @@ function Diabetes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
+
+    const modifiedData = {
+      ...formData,
+      age: formData.age / 100,
+    };
+
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/predictDiabetes', formData, {
+      const response = await axios.post('http://127.0.0.1:5000/api/predictDiabetes', modifiedData, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,

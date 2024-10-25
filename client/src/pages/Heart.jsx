@@ -34,8 +34,12 @@ function Heart() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
+    const modifiedData = {
+      ...formData,
+      age: formData.age / 100,
+    };
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/predictHeart', formData, {
+      const response = await axios.post('http://127.0.0.1:5000/api/predictHeart',modifiedData , {
         headers: {
           'Content-Type': 'application/json',
         }

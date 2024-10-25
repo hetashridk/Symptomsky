@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ChatbotMonkey from '../components/ChatbotMonkey';
+import { motion } from 'framer-motion';
 
 function MonkeyPox() {
   const [photo, setPhoto] = useState(null);
@@ -32,46 +33,111 @@ function MonkeyPox() {
     }
   };
 
+  // Animation variants for fade-in-up
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.2, duration: 0.5, ease: 'easeOut' },
+    }),
+  };
+
   return (
     <div className='bg-[#e5e5e5] w-full flex flex-col items-center p-4'>
       <div className='flex flex-wrap justify-around w-full max-w-6xl'>
         {/* Parameters */}
-        <div className='bg-white shadow-lg rounded-lg p-6 w-full md:w-[48%] mb-4 md:mb-0'>
+        <motion.div
+          className='bg-white shadow-lg rounded-lg p-6 w-full md:w-[48%] mb-4 md:mb-0'
+          initial='hidden'
+          animate='visible'
+          variants={fadeInUpVariants}
+          custom={0}
+        >
           <div className='flex justify-center items-center m-5 text-[#005F73]'>
-            <p className='font-bold text-3xl'>MonkeyPox</p>
+            <motion.p className='font-bold text-3xl' custom={1} variants={fadeInUpVariants}>
+              MonkeyPox
+            </motion.p>
           </div>
-          <form className='grid grid-cols-2 gap-4' onSubmit={handleSubmit}>
-            <div className='mb-4 col-span-2'>
+          <motion.form
+            className='grid grid-cols-2 gap-4'
+            onSubmit={handleSubmit}
+            initial='hidden'
+            animate='visible'
+            variants={fadeInUpVariants}
+            custom={2}
+          >
+            <motion.div className='mb-4 col-span-2' variants={fadeInUpVariants} custom={3}>
               <label htmlFor='photo' className='block mb-1 text-[#005F73] font-semibold'>Photo</label>
-              <input type='file' id='photo' name='photo' className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full' onChange={handleChange} />
-            </div>
-            <div className='mb-4 col-span-2'>
+              <input
+                type='file'
+                id='photo'
+                name='photo'
+                className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full'
+                onChange={handleChange}
+              />
+            </motion.div>
+            <motion.div className='mb-4 col-span-2' variants={fadeInUpVariants} custom={4}>
               <label htmlFor='fever' className='block mb-1 text-[#005F73] font-semibold'>Fever</label>
-              <input type='text' id='fever' name='fever' className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full' />
-            </div>
-            <div className='mb-4 col-span-2'>
+              <input
+                type='text'
+                id='fever'
+                name='fever'
+                className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full'
+              />
+            </motion.div>
+            <motion.div className='mb-4 col-span-2' variants={fadeInUpVariants} custom={5}>
               <label htmlFor='headAche' className='block mb-1 text-[#005F73] font-semibold'>Head ache/ muscle ache</label>
-              <input type='text' id='headAche' name='headAche' className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full' />
-            </div>
-            <div className='mb-4 col-span-2'>
+              <input
+                type='text'
+                id='headAche'
+                name='headAche'
+                className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full'
+              />
+            </motion.div>
+            <motion.div className='mb-4 col-span-2' variants={fadeInUpVariants} custom={6}>
               <label htmlFor='swollenLymphNodes' className='block mb-1 text-[#005F73] font-semibold'>Swollen lymph nodes (Lump like structure in neck / armpits)</label>
-              <input type='text' id='swollenLymphNodes' name='swollenLymphNodes' className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full' />
-            </div>
-            <button type='submit' className='bg-[#005F73] text-white px-4 py-2 rounded-md col-span-2'>Submit</button>
-          </form>
+              <input
+                type='text'
+                id='swollenLymphNodes'
+                name='swollenLymphNodes'
+                className='rounded-md border border-3 bg-[#C2E3EB] border-[#005F73] px-3 py-2 w-full'
+              />
+            </motion.div>
+            <motion.button
+              type='submit'
+              className='bg-[#005F73] text-white px-4 py-2 rounded-md col-span-2'
+              variants={fadeInUpVariants}
+              custom={7} // Delay for submit button
+            >
+              Submit
+            </motion.button>
+          </motion.form>
           {prediction && (
-            <div className='mt-4'>
+            <motion.div
+              className='mt-4'
+              initial='hidden'
+              animate='visible'
+              variants={fadeInUpVariants}
+              custom={8} // Delay for prediction text
+            >
               <p className='text-[#005F73] font-semibold'>Prediction: {prediction}</p>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {/* Chatbot */}
-        <div className='bg-white shadow-lg rounded-lg p-6 w-full md:w-[48%]'>
+        <motion.div
+          className='bg-white shadow-lg rounded-lg p-6 w-full md:w-[48%]'
+          initial='hidden'
+          animate='visible'
+          variants={fadeInUpVariants}
+          custom={5} // Delay for the Chatbot
+        >
           <div className='flex justify-center items-center mb-5 text-[#005F73]'>
             <ChatbotMonkey />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
